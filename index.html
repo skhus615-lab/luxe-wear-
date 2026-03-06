@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuxeWear Boutique — Elegance in Every Stitch</title>
+  <meta name="description"
+    content="Discover timeless elegance at LuxeWear Boutique. Shop curated collections of premium dresses for every occasion — casual, party, wedding, summer & formal wear.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" onclick="showPage('home')">Luxe<span>Wear</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" class="active" data-page="home" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" data-page="shop" onclick="showPage('shop')">Shop</a></li>
+        <li><a href="#" data-page="cart" onclick="showPage('cart')">Cart</a></li>
+        <li><a href="#" data-page="contact" onclick="showPage('contact')">Contact</a></li>
+      </ul>
+      <div class="nav-icons">
+        <button class="nav-icon-btn" onclick="showPage('cart')" aria-label="View Cart" id="navCartBtn">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle Menu" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ============================================
+       HOME PAGE
+       ============================================ -->
+  <div class="page active" id="page-home">
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-bg">
+        <img src="images/hero-banner.png"
+          alt="Indian bridal fashion model wearing a luxurious red and gold lehenga in a grand palace setting">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-subtitle">Festive Collection 2026</p>
+        <h1 class="hero-title">Elegance in<br>Every <em>Stitch</em></h1>
+        <p class="hero-description">Discover timeless Indian elegance with our curated collection of premium ethnic wear
+          — sarees, lehengas, anarkalis & more, crafted for the modern Indian woman.</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="showPage('shop')">
+            Shop Now <i class="fas fa-arrow-right"></i>
+          </button>
+          <button class="btn btn-outline" onclick="showPage('shop', 'Lehenga Choli')">
+            Lehenga Collection
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section" id="categoriesSection">
+      <div class="container">
+        <div class="section-header fade-in">
+          <p class="section-label">Explore</p>
+          <h2 class="section-title">Shop by Category</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="categories-grid fade-in">
+          <div class="category-card" onclick="showPage('shop', 'Sarees')">
+            <img src="images/saree-banarasi.png"
+              alt="Royal Banarasi Silk Sarees Collection - Traditional Indian Sarees">
+            <div class="category-card-overlay">
+              <h3 class="category-card-name">Sarees</h3>
+              <p class="category-card-count">15 Designs</p>
+            </div>
+          </div>
+          <div class="category-card" onclick="showPage('shop', 'Anarkali Suits')">
+            <img src="images/anarkali-festive.png" alt="Festive Anarkali Suits Collection - Designer Indian Anarkali">
+            <div class="category-card-overlay">
+              <h3 class="category-card-name">Anarkali Suits</h3>
+              <p class="category-card-count">12 Designs</p>
+            </div>
+          </div>
+          <div class="category-card" onclick="showPage('shop', 'Lehenga Choli')">
+            <img src="images/lehenga-bridal.png" alt="Bridal Lehenga Choli Collection - Indian Wedding Lehengas">
+            <div class="category-card-overlay">
+              <h3 class="category-card-name">Lehenga Choli</h3>
+              <p class="category-card-count">10 Designs</p>
+            </div>
+          </div>
+          <div class="category-card" onclick="showPage('shop', 'Kurti Sets')">
+            <img src="images/kurti-mirror.png" alt="Designer Kurti Sets Collection - Indian Ethnic Kurtis">
+            <div class="category-card-overlay">
+              <h3 class="category-card-name">Kurti Sets</h3>
+              <p class="category-card-count">18 Designs</p>
+            </div>
+          </div>
+          <div class="category-card" onclick="showPage('shop', 'Indo-Western')">
+            <img src="images/indowestern-floral.png" alt="Indo-Western Fusion Dresses Collection - Modern Indian Wear">
+            <div class="category-card-overlay">
+              <h3 class="category-card-name">Indo-Western</h3>
+              <p class="category-card-count">8 Designs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" style="background: var(--color-cream);" id="featuredSection">
+      <div class="container">
+        <div class="section-header fade-in">
+          <p class="section-label">Curated for You</p>
+          <h2 class="section-title">Featured Dresses</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="products-grid fade-in" id="featuredGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Promo Banner -->
+    <section class="promo-banner section">
+      <div class="container">
+        <div class="promo-inner fade-in">
+          <div class="promo-content">
+            <p class="section-label">Festive Offer</p>
+            <h2>Wedding Season Collection<br>Up to <span style="color: var(--color-gold);">40% Off</span></h2>
+            <p>Celebrate the season with our stunning festive collection. Rich fabrics, intricate embroidery, and
+              timeless Indian elegance await you.</p>
+            <button class="btn btn-dark" onclick="showPage('shop', 'Lehenga Choli')">
+              Explore Collection <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          <div class="promo-image">
+            <img src="images/lehenga-designer.png" alt="Designer Wedding Lehenga - Wedding Season Collection">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonialsSection">
+      <div class="container">
+        <div class="section-header fade-in">
+          <p class="section-label">What They Say</p>
+          <h2 class="section-title">Customer Reviews</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="testimonials-grid fade-in">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">"</p>
+            <p class="testimonial-text">Ordered the Banarasi Silk Saree for my sister's wedding and it was absolutely
+              stunning! The zari work is so intricate and the fabric quality is premium. Delivery was super fast —
+              received it in just 3 days to Panipat. Will definitely order again for Diwali!</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">P</div>
+              <div class="testimonial-info">
+                <h4>Priya Sharma</h4>
+                <p>Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">"</p>
+            <p class="testimonial-text">LuxeWear is now my go-to for every festival and family function. I bought the
+              Festive Anarkali Suit for Karva Chauth and got so many compliments! The embroidery is gorgeous and it fits
+              perfectly. Amazing quality at such reasonable prices.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">A</div>
+              <div class="testimonial-info">
+                <h4>Ananya Verma</h4>
+                <p>Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">"</p>
+            <p class="testimonial-text">Found my dream bridal lehenga here! The Royal Bridal Lehenga Choli was exactly
+              what I envisioned for my wedding. The heavy embroidery, the rich maroon color, and the perfect fitting —
+              everything was just perfect. Worth every rupee! Thank you LuxeWear 💕</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">S</div>
+              <div class="testimonial-info">
+                <h4>Simran Kaur</h4>
+                <p>Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Stay in Touch</p>
+          <h2 class="section-title">Join Our Newsletter</h2>
+          <div class="section-divider" style="margin-top: 16px;"></div>
+        </div>
+        <p style="color: rgba(255,255,255,0.6); margin-bottom: 0; text-align: center;">Be the first to know about new
+          collections, exclusive offers, and style inspirations.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" required
+            id="newsletterEmail">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================
+       SHOP PAGE
+       ============================================ -->
+  <div class="page" id="page-shop">
+    <div class="page-hero">
+      <div>
+        <h1>Our Collection</h1>
+        <p class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / Shop</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <button class="btn btn-dark filter-toggle-btn" onclick="toggleFilters()">
+          <i class="fas fa-sliders-h"></i> Filters
+        </button>
+
+        <div class="shop-layout">
+          <aside class="shop-sidebar" id="shopSidebar">
+            <div class="filter-group">
+              <h3>Category</h3>
+              <div class="filter-options" id="categoryFilters">
+                <label class="filter-option">
+                  <input type="radio" name="category" value="All" checked onchange="filterProducts()"> All Collections
+                </label>
+                <label class="filter-option">
+                  <input type="radio" name="category" value="Sarees" onchange="filterProducts()"> Sarees
+                </label>
+                <label class="filter-option">
+                  <input type="radio" name="category" value="Anarkali Suits" onchange="filterProducts()"> Anarkali Suits
+                </label>
+                <label class="filter-option">
+                  <input type="radio" name="category" value="Lehenga Choli" onchange="filterProducts()"> Lehenga Choli
+                </label>
+                <label class="filter-option">
+                  <input type="radio" name="category" value="Kurti Sets" onchange="filterProducts()"> Kurti Sets
+                </label>
+                <label class="filter-option">
+                  <input type="radio" name="category" value="Indo-Western" onchange="filterProducts()"> Indo-Western
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3>Price Range</h3>
+              <div class="price-range-container">
+                <input type="range" class="price-range-slider" id="priceRange" min="0" max="7000" value="7000"
+                  oninput="updatePriceFilter(this.value)">
+                <div class="price-labels">
+                  <span>₹0</span>
+                  <span id="priceValue">₹7,000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3>Size</h3>
+              <div class="filter-options">
+                <label class="filter-option">
+                  <input type="checkbox" value="S" onchange="filterProducts()"> Small (S)
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" value="M" onchange="filterProducts()"> Medium (M)
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" value="L" onchange="filterProducts()"> Large (L)
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" value="XL" onchange="filterProducts()"> Extra Large (XL)
+                </label>
+              </div>
+            </div>
+          </aside>
+
+          <div class="shop-main">
+            <div class="sort-bar">
+              <p>Showing <span id="productCount">0</span> results</p>
+              <select class="sort-select" id="sortSelect" onchange="filterProducts()">
+                <option value="default">Sort by: Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name">Name: A to Z</option>
+                <option value="newest">Newest First</option>
+              </select>
+            </div>
+            <div class="products-grid" id="shopGrid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================
+       PRODUCT DETAIL PAGE
+       ============================================ -->
+  <div class="page" id="page-product">
+    <div class="product-detail section">
+      <div class="container">
+        <p class="breadcrumb"
+          style="margin-bottom: var(--space-2xl); font-size: 0.85rem; color: var(--color-warm-taupe);">
+          <a href="#" onclick="showPage('home')" style="color: var(--color-gold);">Home</a> /
+          <a href="#" onclick="showPage('shop')" style="color: var(--color-gold);">Shop</a> /
+          <span id="productBreadcrumb">Product Name</span>
+        </p>
+        <div class="product-detail-layout">
+          <div class="product-gallery">
+            <div class="product-gallery-main">
+              <img src="" alt="" id="productMainImg">
+            </div>
+            <div class="product-gallery-thumbs" id="productThumbs">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="product-info">
+            <p class="product-info-category" id="productCategory"></p>
+            <h1 id="productName"></h1>
+            <div class="product-info-rating">
+              <div class="stars" id="productStars"></div>
+              <p id="productReviewCount"></p>
+            </div>
+            <div class="product-info-price">
+              <span class="current" id="productPrice"></span>
+              <span class="original" id="productOriginalPrice"></span>
+              <span class="discount" id="productDiscount"></span>
+            </div>
+            <p class="product-description" id="productDescription"></p>
+
+            <div class="option-group">
+              <p class="option-group-label">Select Size</p>
+              <div class="size-options" id="sizeOptions">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <div class="option-group">
+              <p class="option-group-label">Select Color</p>
+              <div class="color-options" id="colorOptions">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <div class="option-group">
+              <p class="option-group-label">Quantity</p>
+              <div class="quantity-selector">
+                <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                <input type="number" class="qty-input" id="qtyInput" value="1" min="1" max="10">
+                <button class="qty-btn" onclick="changeQty(1)">+</button>
+              </div>
+            </div>
+
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="addToCartFromDetail()" id="addToCartDetailBtn">
+                <i class="fas fa-shopping-bag"></i> Add to Cart
+              </button>
+              <button class="btn-wishlist" aria-label="Add to Wishlist">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       CART PAGE
+       ============================================ -->
+  <div class="page" id="page-cart">
+    <div class="page-hero">
+      <div>
+        <h1>Shopping Cart</h1>
+        <p class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / Cart</p>
+      </div>
+    </div>
+
+    <section class="section cart-section">
+      <div class="container">
+        <div class="cart-layout" id="cartContent">
+          <div class="cart-items-list" id="cartItemsList">
+            <!-- Populated by JS -->
+          </div>
+          <div class="cart-summary" id="cartSummary">
+            <h3>Order Summary</h3>
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="cartSubtotal">$0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span id="cartShipping">Free</span>
+            </div>
+            <div class="summary-row">
+              <span>Tax</span>
+              <span id="cartTax">$0.00</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary" onclick="openCheckout()" id="checkoutBtn">
+              Proceed to Checkout <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Empty Cart Message -->
+        <div class="cart-empty hidden" id="cartEmpty">
+          <div class="cart-empty-icon"><i class="fas fa-shopping-bag"></i></div>
+          <h2>Your cart is empty</h2>
+          <p>Looks like you haven't added any dresses yet. Explore our collection and find your perfect look.</p>
+          <button class="btn btn-primary" onclick="showPage('shop')">
+            Start Shopping <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================
+       CONTACT PAGE
+       ============================================ -->
+  <div class="page" id="page-contact">
+    <div class="page-hero">
+      <div>
+        <h1>Get in Touch</h1>
+        <p class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / Contact</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-layout fade-in">
+          <div class="contact-info">
+            <h2>We'd Love to Hear From You</h2>
+            <p>Whether you have a question about our collection, sizing, orders, or anything else, our team is ready to
+              assist you. Drop us a message and we'll get back to you as soon as possible.</p>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h4>Visit Our Store</h4>
+                <p>Shop No. 12, GT Road, Model Town<br>Panipat, Haryana 132103, India</p>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h4>Email Us</h4>
+                <p>hello@luxewearboutique.in</p>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div>
+                <h4>Call Us</h4>
+                <p>+91 98765 43210</p>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <h4>Business Hours</h4>
+                <p>Mon – Sat: 10 AM – 9 PM<br>Sunday: 11 AM – 7 PM</p>
+              </div>
+            </div>
+
+            <div class="contact-social">
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+              <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+
+          <form class="contact-form" onsubmit="handleContact(event)" id="contactForm">
+            <h3>Send a Message</h3>
+            <div class="form-group">
+              <label for="contactName">Your Name</label>
+              <input type="text" id="contactName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email Address</label>
+              <input type="email" id="contactEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" placeholder="Tell us how we can help you..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+              Send Message <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================
+       CHECKOUT MODAL
+       ============================================ -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal">
+      <!-- Checkout Form -->
+      <div id="checkoutForm">
+        <div class="modal-header">
+          <h2>Checkout</h2>
+          <button class="modal-close" onclick="closeCheckout()" aria-label="Close">×</button>
+        </div>
+        <form onsubmit="handleCheckout(event)">
+          <div class="form-group">
+            <label for="checkName">Full Name</label>
+            <input type="text" id="checkName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="checkEmail">Email Address</label>
+            <input type="email" id="checkEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="checkPhone">Phone Number</label>
+            <input type="tel" id="checkPhone" placeholder="Enter your phone number" required>
+          </div>
+          <div class="form-group">
+            <label for="checkAddress">Shipping Address</label>
+            <input type="text" id="checkAddress" placeholder="Street address, city, state" required>
+          </div>
+          <div class="summary-row total" style="margin-bottom: var(--space-lg);">
+            <span>Order Total</span>
+            <span id="checkoutTotal">$0.00</span>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+            Place Order <i class="fas fa-check"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Screen -->
+      <div class="checkout-success hidden" id="checkoutSuccess">
+        <div class="checkout-success-icon"><i class="fas fa-check-circle"></i></div>
+        <h2>Order Placed Successfully!</h2>
+        <p style="color: var(--color-warm-taupe); margin-bottom: var(--space-xl);">Thank you for shopping with LuxeWear
+          Boutique. You will receive a confirmation email shortly.</p>
+        <button class="btn btn-primary" onclick="closeCheckoutSuccess()" style="margin: 0 auto;">
+          Continue Shopping <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Luxe<span>Wear</span></h3>
+          <p>Elegance in every stitch. We believe every Indian woman deserves to feel confident and beautiful. Our
+            curated ethnic wear collections are crafted with the finest fabrics and impeccable attention to traditional
+            craftsmanship.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('shop')">Shop All</a></li>
+            <li><a href="#" onclick="showPage('shop', 'Lehenga Choli')">Bridal</a></li>
+            <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Customer Care</h4>
+          <ul>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@luxewearboutique.in"><i class="fas fa-envelope"
+                  style="margin-right: 8px; color: var(--color-gold);"></i> hello@luxewearboutique.in</a></li>
+            <li><a href="tel:+919876543210"><i class="fas fa-phone-alt"
+                  style="margin-right: 8px; color: var(--color-gold);"></i> +91 98765 43210</a></li>
+            <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: var(--color-gold);"></i>
+                Model Town, Panipat, Haryana</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 LuxeWear Boutique. All rights reserved.</p>
+        <div class="footer-payments">
+          <span>We Accept:</span>
+          <i class="fab fa-cc-visa" style="font-size: 1.4rem;"></i>
+          <i class="fab fa-cc-mastercard" style="font-size: 1.4rem;"></i>
+          <i class="fab fa-cc-amex" style="font-size: 1.4rem;"></i>
+          <i class="fab fa-cc-paypal" style="font-size: 1.4rem;"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
